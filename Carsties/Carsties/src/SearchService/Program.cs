@@ -38,6 +38,12 @@ namespace SearchService
 
                 x.UsingRabbitMq((context, cfg) =>
                 {
+                    cfg.Host(builder.Configuration["RabbitMq:Host"], "/", host =>
+                    {
+                        host.Username(builder.Configuration.GetValue("RabbitMq:Username", "guest"));
+                        host.Password(builder.Configuration.GetValue("RabbitMq:Password", "guest"));
+                    });
+
                     //To handle in case mongo db is down
                     cfg.ReceiveEndpoint("search-auction-created", e =>
                     {

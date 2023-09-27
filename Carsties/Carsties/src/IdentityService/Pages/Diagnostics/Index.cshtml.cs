@@ -13,7 +13,10 @@ namespace IdentityService.Pages.Diagnostics
 
         public async Task<IActionResult> OnGet()
         {
-            var localAddresses = new string[] { "127.0.0.1", "::1", HttpContext.Connection.LocalIpAddress.ToString() };
+            var localAddresses = new string[] { "172.19.0.1", "172.19.0.7", "127.0.0.1", "::1", HttpContext.Connection.LocalIpAddress.ToString() };
+
+            Console.WriteLine("remote ip address: ", HttpContext.Connection.RemoteIpAddress.ToString());
+            
             if (!localAddresses.Contains(HttpContext.Connection.RemoteIpAddress.ToString()))
             {
                 return NotFound();
