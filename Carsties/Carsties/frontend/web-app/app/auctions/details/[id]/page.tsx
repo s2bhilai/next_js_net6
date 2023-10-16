@@ -1,4 +1,4 @@
-import { getDetailedViewData } from '@/app/actions/auctionActions'
+import { getBidsForAuction, getDetailedViewData } from '@/app/actions/auctionActions'
 import Heading from '@/app/components/Heading';
 import React from 'react'
 import CountdownTimer from '../../CountdownTimer';
@@ -7,6 +7,8 @@ import DetailedSpecs from './DetailedSpecs';
 import { getCurrentUser } from '@/app/actions/authActions';
 import EditButton from './EditButton';
 import DeleteButton from './DeleteButton';
+import BidItem from './BidItem';
+import BidList from './BidList';
 
 //In server components we can use async function, but dont use in client components
 export default async function Details({ params }: { params: { id: string } }) {
@@ -39,9 +41,7 @@ export default async function Details({ params }: { params: { id: string } }) {
           <CarImage imageUrl={data.imageUrl} />
         </div>
 
-        <div className='border-2 rounded-lg p-2 bg-gray-100'>
-          <Heading title='Bids' />
-        </div>
+        <BidList user={user} auction={data} />
       </div>
 
       <div className='mt-3 grid grid-cols-1 rounded-lg'>
